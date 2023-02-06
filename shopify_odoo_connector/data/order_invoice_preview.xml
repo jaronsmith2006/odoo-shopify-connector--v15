@@ -1,0 +1,14 @@
+<odoo>
+	<!--ORDER INVOICE PREVIEW -->
+<!--    <record id="order_invoice_preview_action" model="ir.actions.server">-->
+<!--        <field name="name">Invoice</field>-->
+<!--        <field name="model_id" ref="model_ds_order_tbl"/>-->
+<!--        <field name="binding_model_id" ref="model_ds_order_tbl"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">if record:-->
+<!--            action_values = env.ref('shopify_odoo_connector.action_preview_order_invoice_wizard').read()[0]-->
+<!--            action_values.update({'context': env.context})-->
+<!--            action = action_values-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+  
+    <!-- Top menu item -->
+    <menuitem name="Shopify - Odoo Connector" id="shopify_odoo_connector.menu_root"/>
+      
+    <menuitem name="Dashboard" id="shopify_odoo_connector.dashboard_menu" parent="shopify_odoo_connector.menu_root" sequence="1" action="shopify_odoo_connector.dashboard_action" />
+    <menuitem name="Instances" id="shopify_odoo_connector.instance_menu" parent="shopify_odoo_connector.menu_root" action="shopify_odoo_connector.instances_action" sequence="2" />
+    <menuitem name="Products" id="shopify_odoo_connector.products_menu" parent="shopify_odoo_connector.menu_root" sequence="3"/>
+    <menuitem name="Orders/Customers" id="shopify_odoo_connector.orders_menu" parent="shopify_odoo_connector.menu_root" sequence="4"/>
+    <menuitem name="Operations" id="operation_menu" parent="shopify_odoo_connector.menu_root" sequence="5" />
+    <menuitem name="Locations" id="location_menu" parent="shopify_odoo_connector.menu_root" sequence="8" action="shopify_odoo_connector.location_action" />
+  
+    <!-- PRODUCTS SUBMENU -->
+    <menuitem name="Shopify Products Mapping" id="shopify_odoo_connector.products_mapping" parent="shopify_odoo_connector.products_menu" />
+    <menuitem name="Products" id="shopify_odoo_connector.all_product_list" parent="shopify_odoo_connector.products_mapping"  action="shopify_odoo_connector.products_action" sequence="1" />
+    <menuitem name="Options" id="shopify_odoo_connector.product_option_list" parent="shopify_odoo_connector.products_mapping" action="shopify_odoo_connector.product_options" sequence="2"/>
+    <menuitem name="Variants" id="shopify_odoo_connector.product_variants_list" parent="shopify_odoo_connector.products_mapping" action="shopify_odoo_connector.product_variant_action_d" sequence="4"/>
+  
+    <menuitem name="Odoo Products Mapping" id="shopify_odoo_connector.odoo_products_mapping" parent="shopify_odoo_connector.products_menu" />
+    <menuitem name="Products" id="shopify_odoo_connector.odoo_all_product_list" parent="shopify_odoo_connector.odoo_products_mapping"  action="shopify_odoo_connector.odoo_products_action"  sequence="1" />
+    <menuitem name="Options" id="shopify_odoo_connector.odoo_product_option_list" parent="shopify_odoo_connector.odoo_products_mapping" action="shopify_odoo_connector.odoo_product_options"/>
+    <menuitem name="Variants" id="shopify_odoo_connector.odoo_product_variants_list" parent="shopify_odoo_connector.odoo_products_mapping" action="shopify_odoo_connector.odoo_product_variant_action"/>
+  
+    <!-- ORDERS SUBMENU -->
+    <menuitem name="Orders" id="shopify_odoo_connector.orders_list" parent="shopify_odoo_connector.orders_menu" action="shopify_odoo_connector.orders_action" sequence="1"/>
+    <menuitem name="Customers" id="shopify_odoo_connector.customers_list" parent="shopify_odoo_connector.orders_menu" action="shopify_odoo_connector.order_customer_action"/>
+    <!-- OPERATIONS SUBMENUS-->
+    <menuitem name="Import" id="shopify_odoo_connector.import_menu" parent="shopify_odoo_connector.operation_menu"
+              action="action_import_product_operation"/>
+    <menuitem name="Export" id="shopify_odoo_connector.export_menu" parent="shopify_odoo_connector.operation_menu"
+              action="action_export_product_operation"/>
+  </data>
+</odoo>
