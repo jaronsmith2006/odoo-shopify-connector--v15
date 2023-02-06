@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    
+    <!-- ODOO PRODUCT CREATE/EDIT FORM -->
+    <record model="ir.ui.view" id="create_edit_odoo_product_data_form">
+        <field name="name">Odoo Product</field>
+        <field name="model">ds.odoo_products_tbl</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h2><field name="product_title" placeholder="Product title"  /></h2>
+                    <group>
+                        <group>
+                            <field name="product_status" />
+                            <field name="description" widget="html"/>
+                        </group>
+                        <group>
+                            <field name="exported_in" widget="many2many_tags" readonly="1" />
+                            <field name="vendor" />
+                            <field name="tags" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Options">
+                            <field name="product_options">
+                                <tree string="Options List">
+                                    <field name="option_name" />
+                                    <field name="op_val_id" widget="many2many_tags" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Variants">
+                            <field name="product_variants">
+                                <tree string="Variants List">
+                                    <field name="variant_image" widget="image" class="avatar" width="40" height="40" />
+                                    <field name="title" />
+                                    <field name="sku" />
+                                    <field name="inventory_quantity" />
+                                    <field name="price" />
+                                    <field name="compare_at_price" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Images">
+                            <button name="%(demo_shopify.open_wizard_for_odoo_products_images)d" type="action" string="Add Image"
+                                    class="oe_highlight sp-add-img-btn"/>
+                            <field name="p_images">
+                                <kanban create="false" edit="false">
+                                    <field name="id" />
+                                    <field name="product_image" />
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div t-attf-class="oe_kanban_global_click kanban-section sp-product-image-section">
+                                                <div class="o_kanban_image ma-0">
+                                                    <img alt="Avatar" t-att-src="kanban_image('ds.odoo_product_images_tbl','product_image',
+                                                    record.id.raw_value)"/>
+                                                </div>
+                                                <a href="#" name="delete_product_image" type="object" class="fa fa-times-circle sp-delete-icon ma-0"
+                                                    confirm="Are you sure want to delete product image?">
+                                                    </a>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- ODOO PRODUCT INSTANCE METHOD -->
+    <record model="ir.actions.act_window" id="demo_shopify.odoo_products_action">
+        <field name="name">Odoo Products</field>
+        <field name="res_model">ds.odoo_products_tbl</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Data Available!!</p>
+        </field>
+    </record>
+	
+    <!-- ODOO PRODUCT TREE VIEW  -->
+	<record model="ir.ui.view" id="ds_products_tbl">
+      <field name="name">Odoo Products</field>
+      <field name="model">ds.odoo_products_tbl</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="product_title" />
+            <field name="product_status" decoration-success="product_status == 'active'"
+                   decoration-warning="product_status == 'draft'" widget="badge" />
+            <field name="vendor" />
+            <field name="exported_in" widget="many2many_tags"/>
+            <field name="created_date" />
+        </tree>
+      </field>
+    </record>
+    
+    <!-- ODOO PRODUCT CREATE/EDIT FORM -->
+    <record model="ir.ui.view" id="create_edit_odoo_product_options_form">
+        <field name="name">Odoo Product Options</field>
+        <field name="model">ds.odoo_product_options</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                         <div class="row">
+                            <div class="col-6">
+                                <group>
+                                    <field name="odoo_op_product_id" />
+                                    <field name="option_name" />
+                                    <field name="op_val_id" />
+                                </group>
+                            </div>
+                         </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+  
+	<!-- INSTANCE METHOD -->
+    <record model="ir.actions.act_window" id="demo_shopify.odoo_product_options">
+        <field name="name">Odoo Product Options</field>
+        <field name="res_model">ds.odoo_product_options</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Data Available!!</p>
+        </field>
+    </record>
+	
+    <!-- ODOO OPTIONS TREE VIEW  -->
+	<record model="ir.ui.view" id="demo_shopify.odoo_product_op_tree">
+      <field name="name">Odoo Product Options</field>
+      <field name="model">ds.odoo_product_options</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="option_name"/>
+            <field name="op_val_id" widget="many2many_tags"/>
+            <field name="odoo_op_product_id"/>
+        </tree>
+      </field>
+    </record>
+    
+    <!-- ODOO PRODUCT IMAGES INSTANCE METHOD -->
+    <record model="ir.actions.act_window" id="demo_shopify.odoo_product_images_action">
+        <field name="name">Odoo Product Images</field>
+        <field name="res_model">ds.odoo_product_images_tbl</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Data Available!!</p>
+        </field>
+    </record>
+    
+    <!-- ODOO VARIANTS IMAGES TREE VIEW  -->
+	<record model="ir.ui.view" id="demo_shopify.odoo_product_image_tree">
+      <field name="name">Odoo Product Images</field>
+      <field name="model">ds.odoo_product_images_tbl</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="product_id"/>
+            <field name="product_image" widget="image" class="avatar_user" width="40" height="40" />
+        </tree>
+      </field>
+    </record>
+    
+    <!-- ODOO VARIANT INSTANCE METHOD -->
+    <record model="ir.actions.act_window" id="demo_shopify.odoo_product_variant_action">
+        <field name="name">Odoo Product Variants</field>
+        <field name="res_model">ds.odoo_products_variants_tbl</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Data Available!!</p>
+        </field>
+    </record>
+	
+    <!-- ODOO VARIANT TREE VIEW  -->
+	<record model="ir.ui.view" id="demo_shopify.odoo_product_variant_tree">
+      <field name="name">Odoo Product Variants</field>
+      <field name="model">ds.odoo_products_variants_tbl</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="variant_image" widget="image" class="avatar" width="40" height="40" />
+            <field name="title"/>
+            <field name="price"/>
+            <field name="sku"/>
+            <field name="inventory_quantity"/>
+            <field name="product_id" />
+        </tree>
+      </field>
+    </record>
+    
+     <!-- CREATE/EDIT FORM OF SHOPIFY PRODUCT VARIANT IN PRODUCT DESCRIPTION -->
+    <record model="ir.ui.view" id="create_edit_odoo_product_variant_form">
+        <field name="name">Odoo Product Variants </field>
+        <field name="model">ds.odoo_products_variants_tbl</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet>
+                    <div class="row">
+                        <div class="col">
+                            <group>
+                                <field name="product_id" />
+                            </group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <group>
+                                <field name="title" />
+                                <field name="sku" />
+                                <field name="price" />
+                                <field name="weight" />
+                                <field name="weight_unit" />
+                                <field name="inventory_quantity" />
+                            </group>
+                        </div>
+                        
+                        <div class="col">
+                            <field name="variant_image" widget="image" class="oe_avatar" />
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+  
+</odoo>

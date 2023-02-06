@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    
+    <!-- LOCATION CREATE/EDIT FORM -->
+     <record model="ir.ui.view" id="create_edit_location_data_form">
+        <field name="name">Locations</field>
+        <field name="model">ds.locations_tbl</field>
+        <field name="arch" type="html">
+            <form create="false" edit="false">
+                <sheet>
+                    <h1><field name="instance" /></h1>
+                    <group>
+                        <group>
+                            <h2><field name="location_name" /> -
+                                <span class="location-data"><field name="location_id" /></span>
+                            </h2>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Variants">
+                            <field name="variants_inventory_data">
+                                <tree string="Variant List">
+                                    <field name="product_id" />
+                                    <field name="variant_id" />
+                                    <field name="available" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+	<!-- VARIANT WISE INVENTORY LIST METHOD -->
+    <record model="ir.actions.act_window" id="demo_shopify.variants_location_action">
+        <field name="name">Inventory Variants Locations</field>
+        <field name="res_model">ds.variant_inventory_tbl</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Data Available!!</p>
+        </field>
+    </record>
+	
+    <!-- VARIANT WISE INVENTORY LIST VIEW  -->
+	<record model="ir.ui.view" id="variant_locations_tree_view">
+      <field name="name">Inventory Variants Locations</field>
+      <field name="model">ds.variant_inventory_tbl</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="product_id" />
+            <field name="variant_id" />
+            <field name="location_name" />
+            <field name="available" />
+        </tree>
+      </field>
+    </record>
+    
+    <!-- SEARCHING IN LOCATION LIST -->
+    <record model="ir.ui.view" id="locations_search_list">
+      <field name="name">Locations Searching</field>
+      <field name="model">ds.locations_tbl</field>
+      <field name="arch" type="xml">
+        <search string="Search location">
+            <!-- GROUP BY INSTANCE -->
+            <group expand="0" string="Group By Instance">
+                <filter string="Instance" name="instance" context="{'group_by':'instance'}" />
+            </group>
+        </search>
+      </field>
+    </record>
+    
+    <!-- LOCATION INSTANCE METHOD -->
+    <record model="ir.actions.act_window" id="demo_shopify.location_action">
+        <field name="name">Locations</field>
+        <field name="res_model">ds.locations_tbl</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Data Available!!</p>
+        </field>
+    </record>
+    
+    <!-- KANBAN VIEW OF LOCATIONS -->
+	<record model="ir.ui.view" id="location_kanban_view">
+      <field name="name">Locations</field>
+      <field name="model">ds.locations_tbl</field>
+      <field name="arch" type="xml">
+        <kanban create="false" edit="false">
+            <field name="id" />
+            <field name="location_id"/>
+            <field name="location_name"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_global_click">
+                        <div class="oe_kanban_details">
+                            <strong class="o_kanban_record_title">
+                              <h2><field name="location_name"/></h2>
+                            </strong>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+      </field>
+    </record>
+    
+    <!-- TREE VIEW OF LOCATIONS -->
+	<record model="ir.ui.view" id="location_kanban_tree">
+      <field name="name">Locations</field>
+      <field name="model">ds.locations_tbl</field>
+      <field name="arch" type="xml">
+        <tree create="false" edit="false">
+            <field name="location_id"/>
+            <field name="location_name"/>
+            <field name="instance"/>
+        </tree>
+      </field>
+    </record>
+
+</odoo>

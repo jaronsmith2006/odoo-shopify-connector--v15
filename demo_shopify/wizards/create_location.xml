@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="action_add_location" model="ir.ui.view">
+       <field name="name">crm.lead.lost.form</field>
+       <field name="model">create.create_location_tbl</field>
+       <field name="arch" type="xml">
+           <form string="Add Location">
+               <group>
+                  <group>
+                       <field name="instance" />
+                       <field name="location_name" />
+                   </group>
+               </group>
+           </form>
+       </field>
+   </record>
+	
+	<!-- ACTION OF BUTTON CLICKED EVENT FOR NEW LOCATION -->
+	<record id="action_create_location" model="ir.actions.act_window">
+		<field name="name">Locations</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">create.create_location_tbl</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="action_add_location"/>
+		<field name="target">new</field>
+	</record>
+
+
+</odoo>

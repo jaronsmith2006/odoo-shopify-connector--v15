@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<!-- WIZARD OPEN WHEN EXPORT SUBMENU CLICKED -->
+	<record id="product_export_popup" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form</field>
+        <field name="model">create.export_options_tbl</field>
+        <field name="arch" type="xml">
+            <form string="Export Products From Odoo To Shopify">
+	            <group>
+		            <group>
+			            <separator string="From Instance"/>
+	                    <field name="from_instance" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+	                </group>
+		            <group>
+			            <separator string="To Instance"/>
+	                    <field name="instance" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+	                </group>
+	            </group>
+<!--	            <p class="text-muted">Note: Update a product if already exist and create if not exist.</p>-->
+	            <div class="sp-note-section">
+                    <p class="sp-note-title">Note: </p>
+                    <li><b>Update</b> Products if already exist in your Shopify store or <b>Create</b> if not exists.</li>
+                </div>
+                <footer>
+                    <button name="export_all_products" string="Export" type="object" class="btn-primary" data-hotkey="q" confirm="Are you sure want to export product?" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+	<!-- CALLED WHEN EXPORT SUBMENU CLICKED -->
+	<record id="action_export_product_operation" model="ir.actions.act_window">
+	    <field name="name">Export Products To Shopify</field>
+		<field name="type">ir.actions.act_window</field>
+	    <field name="res_model">create.export_options_tbl</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="product_export_popup"/>
+        <field name="target">new</field>
+	</record>
+ 
+	<!-- EXPORT PRODUCTS FROM ODOO TO SHOPIFY & WIZARD OPEN WHEN EXPORT BUTTON OF ACTION IS CLICKED -->
+	<record model="ir.ui.view" id="export_product_from_odoo_to_shopify_wizard_form_view">
+        <field name="name">Export Products To Shopify</field>
+        <field name="model">create.import_options_tbl</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="instance" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+                        </group>
+                    </group>
+	                <div class="sp-note-section">
+	                    <p class="sp-note-title">Note: </p>
+	                    <li><b>Update</b> Products if already exist in your Shopify store or <b>Create</b> if not exists.</li>
+	                </div>
+                  <footer>
+                        <button name="export_product_by_action" type="object" string="Export" class="oe_highlight" confirm="Are you sure want to export product?" />
+                   </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	
+    <!-- EXPORT PRODUCTS FROM ODOO TO SHOPIFY & CALLED WHEN EXPORT BUTTON OF ACTION IS CLICKED -->
+    <record model="ir.actions.act_window" id="action_odoo_export_product_shopify_wizard">
+        <field name="name">Export Products To Shopify</field>
+        <field name="res_model">create.import_options_tbl</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="export_product_from_odoo_to_shopify_wizard_form_view" />
+        <field name="target">new</field>
+    </record>
+	
+	<!-- SHOPIFY PRODUCT EXPORT / WIZARD OPEN WHEN EXPORT BUTTON OF ACTION IS CLICKED -->
+	<record model="ir.ui.view" id="export_shopify_product_wizard_form_view">
+        <field name="name">Export Shopify Product</field>
+        <field name="model">create.import_options_tbl</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="instance" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+                        </group>
+                    </group>
+	                <div class="sp-note-section">
+	                    <p class="sp-note-title">Note: </p>
+	                    <li><b>Update</b> Products if already exist in your Shopify store or <b>Create</b> if not exists.</li>
+	                </div>
+                  <footer>
+                        <button name="export_shopify_product_by_action" type="object" string="Export" class="oe_highlight" confirm="Are you sure want to export product?" />
+                   </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	
+	<!-- SHOPIFY PRODUCT EXPORT / CALLED WHEN EXPORT BUTTON OF SHOPIFY ACTION IS CLICKED -->
+    <record model="ir.actions.act_window" id="action_shopify_export_product_shopify_wizard">
+        <field name="name">Export Products To Shopify</field>
+        <field name="res_model">create.import_options_tbl</field>
+        <field name="view_mode">form</field>
+	    <field name="view_id" ref="export_shopify_product_wizard_form_view" />
+        <field name="target">new</field>
+    </record>
+</odoo>
