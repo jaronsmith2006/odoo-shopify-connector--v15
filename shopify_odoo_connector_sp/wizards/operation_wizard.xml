@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<!-- WIZARD OPEN WHEN IMPORT SUBMENU CLICKED -->
+	<record id="product_import_popup" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form</field>
+        <field name="model">create.import_options_tbl</field>
+        <field name="arch" type="xml">
+            <form string="Import Products">
+	            <group>
+	                <group>
+	                    <field name="instance" options="{'no_quick_create': True, 'no_create_edit' : True}" />
+	                </group>
+	            </group>
+	            <group>
+		            <group>
+		                <separator string="Products"/>
+		                <field name="import_product"/>
+	                </group>
+		            <group>
+		                <separator string="Customers"/>
+		                <field name="import_customer"/>
+	                </group>
+	           </group>
+				<group>
+		            <group>
+		                <separator string="Orders"/>
+		                <field name="import_orders"/>
+	                </group>
+	            </group>
+	            <div class="sp-note-section">
+                    <p class="sp-note-title">Note: </p>
+                    <li><b>Update</b> Products/Orders/Customers if already exist in this odoo module or <b>Create</b> if not exists.</li>
+                </div>
+                <footer>
+                    <button name="import_data_from_odoo_to_shopify" string="Import" type="object" class="btn-primary"
+                            confirm="Are you sure want to import?" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+	<!-- CALLED WHEN IMPORT SUBMENU CLICKED -->
+	<record id="action_import_product_operation" model="ir.actions.act_window">
+	    <field name="name">Import</field>
+		<field name="type">ir.actions.act_window</field>
+	    <field name="res_model">create.import_options_tbl</field>
+		<field name="view_mode">form</field>
+		<field name="domain">[('state', '!=', '2')]</field>
+		<field name="view_id" ref="product_import_popup"/>
+        <field name="target">new</field>
+	</record>
+</odoo>

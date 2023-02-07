@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<!-- FOR SHOPIFY PRODUCTS -->
+	<record id="action_for_product_image" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form</field>
+        <field name="model">create.p_images_tbl</field>
+        <field name="arch" type="xml">
+            <form string="Add Product Image">
+                <group>
+                    <field name="product_image" class="oe_avatar" widget="image" />
+                </group>
+                <footer>
+                    <button name="add_product_image_btn_action" string="Add" type="object" class="btn-primary" context="{'product_type': 0}"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+	
+	<!-- FOR SHOPIFY PRODUCTS -->
+	<!-- PERFORM WHEN ADD IMAGE BUTTON CLICK -->
+	<record id="open_wizard_for_product_images" model="ir.actions.act_window">
+	    <field name="context">{"default_product_id": active_id}</field>
+	    <field name="name">Add Image</field>
+		<field name="type">ir.actions.act_window</field>
+	    <field name="res_model">create.p_images_tbl</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="action_for_product_image"/>
+        <field name="target">new</field>
+	</record>
+	
+	<!-- FOR ODOO PRODUCTS -->
+	<record id="action_for_odoo_product_image" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form</field>
+        <field name="model">create.p_images_tbl</field>
+        <field name="arch" type="xml">
+            <form string="Add Product Image">
+                <group>
+                    <field name="product_image" class="oe_avatar" widget="image" />
+                </group>
+                <footer>
+                    <button name="add_product_image_btn_action" string="Add" type="object" class="btn-primary" context="{'product_type': 1}"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+	
+	<!-- FOR ODOO PRODUCTS -->
+	<!-- PERFORM WHEN ADD IMAGE BUTTON CLICK -->
+	<record id="open_wizard_for_odoo_products_images" model="ir.actions.act_window">
+	    <field name="context">{"default_product_id": active_id}</field>
+	    <field name="name">Add Image</field>
+		<field name="type">ir.actions.act_window</field>
+	    <field name="res_model">create.p_images_tbl</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="action_for_odoo_product_image"/>
+        <field name="target">new</field>
+	</record>
+</odoo>

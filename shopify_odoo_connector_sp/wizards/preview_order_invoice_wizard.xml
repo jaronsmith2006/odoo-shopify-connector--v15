@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<!-- SHOPIFY PRODUCT EXPORT / WIZARD OPEN WHEN EXPORT BUTTON OF ACTION IS CLICKED -->
+	<record model="ir.ui.view" id="order_invoice_wizard_form_view">
+        <field name="name">Invoice</field>
+        <field name="model">create.orders</field>
+        <field name="arch" type="html">
+            <form>
+                <sheet>
+                    <h1><field name="order_name" /></h1>
+                    <h1><field name="customer_id" /></h1>
+                    <h1><field name="line_item_id" /></h1>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_preview_order_invoice_wizard">
+        <field name="name">Invoice</field>
+        <field name="res_model">create.orders</field>
+        <field name="view_mode">form</field>
+	    <field name="view_id" ref="order_invoice_wizard_form_view" />
+        <field name="target">new</field>
+    </record>
+</odoo>

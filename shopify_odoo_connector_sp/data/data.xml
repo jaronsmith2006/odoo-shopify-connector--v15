@@ -1,0 +1,5 @@
+<openerp>
+    <data noupdate="1">
+<!--        <function model="ds.products_tbl" name="delete_db_data"/>-->
+    </data>
+</openerp>

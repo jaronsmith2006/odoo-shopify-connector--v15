@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<!-- INSTANCES GRAPH VIEW -->
+    <record id="dashboard_instance_kanban_view" model="ir.ui.view">
+        <field name="name">shopify_odoo_connector_sp.instance_tbl.graph</field>
+        <field name="model">ds.products_tbl</field>
+        <field name="arch" type="xml">
+            <graph string="Products" type="pie">
+	            <field name="instance" />
+            </graph>
+        </field>
+    </record>
+	
+	<!-- INSTANCES GRAPH -->
+	<record id="action_instance_data" model="ir.actions.act_window">
+		<field name="name">Instance Data</field>
+		<field name="type">ir.actions.act_window</field>
+        <field name="res_model">ds.products_tbl</field>
+        <field name="view_mode">graph</field>
+    </record>
+	
+	<!-- ORDERS GRAPH VIEW -->
+    <record id="dashboard_order_kanban_view" model="ir.ui.view">
+        <field name="name">order_graph</field>
+        <field name="model">ds.order_tbl</field>
+        <field name="arch" type="xml">
+            <graph string="orders" type="line">
+	            <field name="created_date" interval="month"/>
+	            <field name="instance_id"/>
+            </graph>
+        </field>
+    </record>
+	
+	<!-- ORDERS GRAPH -->
+	<record id="action_order_data" model="ir.actions.act_window">
+		<field name="name">Order Data</field>
+        <field name="res_model">ds.order_tbl</field>
+        <field name="view_mode">graph</field>
+    </record>
+	
+	<!-- LOCATION DATA KANBAN -->
+    <record model="ir.actions.act_window" id="action_location_data">
+		<field name="name">Locations</field>
+		<field name="res_model">ds.locations_tbl</field>
+		<field name="view_mode">kanban</field>
+		<field name="view_id" ref="location_kanban_view" />
+    </record>
+	
+	<!-- PRODUCT DATA KANBAN -->
+	<record id="action_product_data" model="ir.actions.act_window">
+		<field name="name">Products Data</field>
+        <field name="res_model">shopify_odoo_connector_sp.instance_tbl</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="shopify_instance_product_kanban_view" />
+		<field name="domain">[('state', '=', '1')]</field>
+    </record>
+	
+	<!-- DASHBOARD VIEW -->
+    <record model="ir.ui.view" id="dashboard_view_dt">
+        <field name="name">Dashboard</field>
+        <field name="model">board.board</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard Data">
+	            <board style="1-1">
+	                <column>
+		                <action string="Products" name="%(action_instance_data)d" />
+		                <action string="Instances" name="%(action_product_data)d" />
+	                </column>
+		            <column>
+			            <action string="Orders" name="%(shopify_odoo_connector_sp.action_order_data)d" />
+			            <action string="Locations" name="%(action_location_data)d" />
+	                </column>
+	            </board>
+            </form>
+        </field>
+    </record>
+	
+	<!-- DASHBOARD ACTION -->
+	<record model="ir.actions.act_window" id="shopify_odoo_connector_sp.dashboard_action">
+	    <field name="name">Dashboard</field>
+	    <field name="res_model">board.board</field>
+	    <field name="view_mode">form</field>
+	    <field name="usage">menu</field>
+	    <field name="view_id" ref="dashboard_view_dt"/>
+	</record>
+</odoo>

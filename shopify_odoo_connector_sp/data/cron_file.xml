@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PRODUCT CRON FUNCTION CALL -->
+    <record id="autovacuum_job" model="ir.cron">
+        <field name="name">Shopify connect Product</field>
+        <field name="model_id" ref="model_shopify_odoo_connector_sp_common"/>  <!-- MODEL NAME -->
+        <field name="state">code</field>
+        <field name="code">model.perform_action_by_product_cron()</field> <!-- FUNCTION CALL WHEN CRON FILE CALLED -->
+        <field name='interval_number'>13</field> <!-- INTERVAL NUMBER -->
+        <field name='interval_type'>minutes</field> <!-- INTERVAL TYPE -->
+        <field name="numbercall">-1</field>
+    </record>
+    
+    <!-- ORDER CRON FUNCTION CALL -->
+    <record id="order_cron_job" model="ir.cron">
+        <field name="name">Shopify connect Order Cron</field>
+        <field name="model_id" ref="model_shopify_odoo_connector_sp_common"/>  <!-- MODEL NAME -->
+        <field name="state">code</field>
+        <field name="code">model.perform_action_by_order_cron()</field> <!-- FUNCTION CALL WHEN CRON FILE CALLED -->
+        <field name='interval_number'>6</field> <!-- INTERVAL NUMBER -->
+        <field name='interval_type'>minutes</field> <!-- INTERVAL TYPE -->
+        <field name="numbercall">-1</field>
+    </record>
+    
+    <!-- CUSTOMERS CRON FUNCTION CALL -->
+    <record id="customers_cron_job" model="ir.cron">
+        <field name="name">Shopify connect Customer Cron</field>
+        <field name="model_id" ref="model_shopify_odoo_connector_sp_common"/>  <!-- MODEL NAME -->
+        <field name="state">code</field>
+        <field name="code">model.perform_action_by_customer_cron()</field> <!-- FUNCTION CALL WHEN CRON FILE CALLED -->
+        <field name='interval_number'>10</field> <!-- INTERVAL NUMBER -->
+        <field name='interval_type'>minutes</field> <!-- INTERVAL TYPE -->
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>
